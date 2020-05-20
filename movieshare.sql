@@ -9,7 +9,8 @@ create table film(
     ime_redatelja varchar(50),
     glavni_glumac varchar(50),
     trajanje int,
-    dobavljac int
+    dobavljac int,
+    godina char(4)
 );
 
 create table zanr(
@@ -28,7 +29,7 @@ create table gledanje(
     sifra int not null primary key auto_increment,
     film int,
     korisnicki_racun int,
-    korisnik int
+    vrijeme_gledanja datetime
 );
 
 create table korisnicki_racun(
@@ -54,6 +55,5 @@ alter table film add foreign key (dobavljac) references dobavljac(sifra);
 
 alter table gledanje add foreign key (film) references film(sifra);
 alter table gledanje add foreign key (korisnicki_racun) references korisnicki_racun(sifra);
-alter table gledanje add foreign key (korisnik) references korisnik(sifra);
 
 alter table korisnicki_racun add foreign key (korisnik) references korisnik(sifra);
