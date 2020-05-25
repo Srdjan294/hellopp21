@@ -73,3 +73,8 @@ inner join prijateljica b on a.sifra=b.zarucnik
 inner join neprijateljica c on b.sifra=c.prijateljica 
 inner join svekar d on c.sifra=d.neprijateljica
 where b.eura=84 and a.carape='%ba%';
+
+#6. Prikažite kolone carape i kratkamajica iz tablice zarucnik čiji se primarni ključ ne nalaze u tablici zarucnik_punica. (5)
+
+select carape, kratkamajica from zarucnik 
+where sifra not in (select zarucnik from zarucnik_punica);

@@ -9,9 +9,9 @@ insert into snasa (eura,narukvica,drugiputa,carape) values
 #select * from snasa;
 
 insert into ostavljena (jmbag,bojaociju,suknja,bojakose,prviputa,carape) values
-('11111111111','zelena','kratka','plava','2020-04-05','crvene'),
-('22222222222','smeđa','duga','smeđa','2020-03-03','plave'),
-('33333333333','plava','srednja','crvena','2020-03-01','crne');
+('11111111111','abad','kratka','plava','2020-04-05','crvene'),
+('22222222222','ba','duga','smeđa','2020-03-03','plave'),
+('33333333333','ba','srednja','crvena','2020-03-01','crne');
 
 #describe ostavljena;
 #select * from ostavljena;
@@ -19,13 +19,13 @@ insert into ostavljena (jmbag,bojaociju,suknja,bojakose,prviputa,carape) values
 insert into ostavljena_snasa (ostavljena,snasa) values
 (1,1),
 (2,2),
-(3,3);
+(1,2);
 
 #describe ostavljena_snasa;
 #select * from ostavljena_snasa;
 
 insert into mladic (prstena,maraka,suknja,narukvica,ostavljena) values
-(1,13.22,'kratka',1,1),
+(1,9.12,'kratka',1,1),
 (2,21.22,'duga',2,2),
 (3,21.21,'srednja',3,3);
 
@@ -53,10 +53,10 @@ update sestra set hlace='Osijek';
 #3. U tablici punac obrišite sve zapise čija je vrijednost kolone vesta različito od AB.
 
 #describe punac;
-insert into punac(ekstroventno,vesta,asocijalno,eura) values
-(1,'AB',1,12.22),
-(1,'debela',1,12.33),
-(1,'zimska',1,13.22);
+insert into punac(ekstroventno,vesta,asocijalno,eura,prviputa) values
+(1,'AB',1,12.22,'2020-03-03'),
+(1,'debela',1,12.33,'2020-03-01'),
+(1,'zimska',1,13.22,'2020-01-02');
 
 #select * from punac;
 
@@ -64,7 +64,7 @@ delete from punac where vesta!='AB';
 
 #4. Izlistajte suknja iz tablice mladic uz uvjet da vrijednost kolone maraka nije 7,11,18,25 ili 40.;
 
-select *,suknja from mladic where maraka not in (7,11,18,25,40);
+select suknja from mladic where maraka not in (7,11,18,25,40);
 
 #describe mladic;
 
@@ -72,5 +72,21 @@ select *,suknja from mladic where maraka not in (7,11,18,25,40);
 #da su vrijednosti kolone maraka iz tablice mladic različito od 95 te da su vrijednosti kolone bojaociju
 #iz tablice ostavljena sadrže niz znakova ba. Podatke posložite po jmbag iz tablice cura silazno.
 
+select d.prviputa, c.jmbag
+from ostavljena a 
+inner join mladic b on a.sifra=b.ostavljena
+inner join cura c on b.sifra=c.mladic 
+inner join punac d on c.sifra=d.cura
+where b.maraka!=95 and a.bojaociju='%ba%';
+
 #describe sestra;
 
+#6. Prikažite kolone bojaociju i suknja iz tablice ostavljena čiji se primarni ključ ne nalaze u tablici ostavljena_snasa. (5)
+
+/*select a.bojaociju, a.suknja 
+from ostavljena a 
+inner join ostavljena_snasa b on a.sifra=b.ostavljena 
+where a.sifra!=b.ostavljena;*/
+
+select bojaociju, suknja from ostavljena
+where sifra not in (select ostavljena from ostavljena_snasa);
