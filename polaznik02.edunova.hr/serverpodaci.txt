@@ -1,8 +1,0 @@
-podaci za spajanje na cpanel
-xxxx
-xxxx
-
-podaci za spajanje na mysql
-baza aurelije_pp21
-korisnik aurelije_edunova
-lozinka aurelije_edunova
