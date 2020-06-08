@@ -1,0 +1,40 @@
+# jednom definirati svoje podatke
+git config --global user.name "Predavač Udunova"
+git config --global user.email "predavac@edunova.hr"
+
+
+# Na github kreirati prazni repozitorij
+# https://github.com/predavac/hellopp21.git
+
+d:
+cd pp21
+mkdir hello
+cd hello
+
+----- u direktorij postaviti sliku
+
+#u željenom direktoriju inicirati repozitorij
+git init
+
+# dodati sve nove datoteke
+git add *
+
+# čuveni commit
+git commit -m "Uvijek pisati smislene komentare"
+
+#prvi puta kada repozitorij nije na github
+git remote add origin https://github.com/predavac/hello.git
+
+# prvi push ide malo dužom sintaksom
+git push -u origin master
+
+# u prozoru koji iskoči unijeti svoje pristupne podatke
+
+
+# nakon što završite logičku cjelinu
+git add *
+git commit -m "Izmjene na ..."
+git push
+
+
+# Korištenje vizualnih alata (integrirano u VS Code, Github Desktop, Sourcetree)
